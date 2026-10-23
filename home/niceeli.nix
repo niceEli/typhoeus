@@ -70,7 +70,10 @@ in
       };
     };
 
-    nushell.enable = true;
+    nushell = {
+      enable = true;
+      loadSessionVariables = true;
+    };
 
     bash = {
       enable = true;
