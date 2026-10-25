@@ -8,6 +8,15 @@
 
     nixpkgs.useGlobalPackages = true;
 
+    performance = {
+      byteCompileLua = {
+        enable = true;
+        nvimRuntime = true;
+        configs = true;
+        plugins = true;
+      };
+    };
+
     globals = {
       mapleader = " ";
       maplocalleader = " ";
@@ -454,6 +463,13 @@
       vim.api.nvim_create_autocmd("ColorScheme", { callback = transparent })
 
       vim.cmd.colorscheme("habamax")
+
+      if vim.g.neovide then
+        vim.o.guifont = "DepartureMono Nerd Font,Unifont:h14"
+        vim.keymap.set("n", "<F11>", function()
+          vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+        end, { desc = "Toggle Neovide fullscreen" })
+      end
     '';
   };
 }
