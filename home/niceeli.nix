@@ -60,7 +60,11 @@ in
           autocrlf = "input";
           eol = "lf";
         };
-        diff.tool = "nvimdiff";
+        diff = {
+          tool = "nvimdiff";
+          algorithm = "histogram";
+          colorMoved = "zebra";
+        };
         difftool.prompt = false;
         merge.tool = "nvimdiff";
       };
