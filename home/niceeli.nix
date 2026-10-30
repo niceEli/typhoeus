@@ -35,6 +35,7 @@ in
       btop
       fastfetch
       lazygit
+      subversion
     ];
   };
 
