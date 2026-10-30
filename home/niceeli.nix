@@ -95,14 +95,12 @@ in
       settings = builtins.fromJSON (builtins.readFile ./shell/config.omp.json);
     };
 
-    tmux = {
+    yazi = {
       enable = true;
-      shell = "${pkgs.nushell}/bin/nu";
-      terminal = "tmux-256color";
-      historyLimit = 100000;
+      enableNushellIntegration = true;
     };
 
-    yazi = {
+    devenv = {
       enable = true;
       enableNushellIntegration = true;
     };

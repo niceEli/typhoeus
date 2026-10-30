@@ -1,4 +1,4 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
   programs.tmux = {
@@ -12,6 +12,7 @@
     escapeTime = 0;
     terminal = "tmux-256color";
     sensibleOnTop = false;
+    shell = "${pkgs.nushell}/bin/nu";
 
     extraConfig = ''
       set -g focus-events on
