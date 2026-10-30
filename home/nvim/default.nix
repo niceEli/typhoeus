@@ -1,4 +1,9 @@
-{ pkgs, inputs, ... }:
+{
+  pkgs,
+  inputs,
+  lib,
+  ...
+}:
 {
   programs.nixvim = {
     enable = true;
@@ -7,6 +12,8 @@
     vimAlias = true;
 
     nixpkgs.useGlobalPackages = true;
+
+    colorscheme = "habamax";
 
     performance = {
       byteCompileLua = {
@@ -77,7 +84,11 @@
       mouse = "a";
       incsearch = true;
       hlsearch = true;
-      lazyredraw = true;
+      path = [
+        "."
+        ""
+        "**"
+      ];
       completeopt = [
         "menu"
         "menuone"
@@ -97,6 +108,26 @@
         "*/obj/*"
       ];
     };
+
+    highlightOverride =
+      lib.genAttrs
+        [
+          "Normal"
+          "NormalNC"
+          "NormalFloat"
+          "FloatBorder"
+          "SignColumn"
+          "EndOfBuffer"
+          "LineNr"
+          "CursorLineNr"
+          "FoldColumn"
+          "WinSeparator"
+        ]
+        (_: {
+          bg = "none";
+          ctermbg = "none";
+          update = true;
+        });
 
     keymaps = [
       {
@@ -317,6 +348,8 @@
     };
 
     lsp = {
+      inlayHints.enable = true;
+
       completion = {
         enable = true;
         settings.autotrigger = true;
@@ -402,23 +435,12 @@
           options.desc = "Diagnostics list";
         }
         {
-          mode = "i";
-          key = "<C-Space>";
-          action.__raw = "vim.lsp.completion.get";
-          options.desc = "Trigger completion";
+          mode = "n";
+          key = "<leader>uh";
+          action.__raw = "function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled()) end";
+          options.desc = "Toggle inlay hints";
         }
       ];
-
-      onAttach = ''
-        if client:supports_method("textDocument/inlayHint", bufnr) then
-          vim.keymap.set("n", "<leader>uh", function()
-            vim.lsp.inlay_hint.enable(
-              not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }),
-              { bufnr = bufnr }
-            )
-          end, { buffer = bufnr, desc = "Toggle inlay hints" })
-        end
-      '';
     };
 
     autoCmd = [
@@ -439,8 +461,6 @@
     ];
 
     extraConfigLua = ''
-      vim.opt.path:append("**")
-
       if vim.o.shell:match("/nu$") then
         vim.opt.shellpipe = "| ^tee"
       end
@@ -448,22 +468,8 @@
       vim.g.baleia = require("baleia").setup({})
     '';
 
+    # neovide config
     extraConfigLuaPost = ''
-      local function transparent()
-        local groups = {
-          "Normal", "NormalNC", "NormalFloat", "FloatBorder", "SignColumn",
-          "EndOfBuffer", "LineNr", "CursorLineNr", "FoldColumn", "WinSeparator",
-        }
-        for _, g in ipairs(groups) do
-          local hl = vim.api.nvim_get_hl(0, { name = g, link = false })
-          hl.bg, hl.ctermbg = "none", "none"
-          vim.api.nvim_set_hl(0, g, hl)
-        end
-      end
-      vim.api.nvim_create_autocmd("ColorScheme", { callback = transparent })
-
-      vim.cmd.colorscheme("habamax")
-
       if vim.g.neovide then
         vim.o.guifont = "DepartureMono Nerd Font,Unifont:h14"
         vim.keymap.set("n", "<F11>", function()
