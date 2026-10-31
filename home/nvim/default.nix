@@ -270,6 +270,8 @@
       mini-indentscope.enable = true;
       mini-trailspace.enable = true;
 
+      orgmode.enable = true;
+
       fidget.enable = true;
       render-markdown.enable = true;
 
