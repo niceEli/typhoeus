@@ -266,9 +266,14 @@
       mini-pick.enable = true;
       mini-pairs.enable = true;
       mini-statusline.enable = true;
+      mini-diff.enable = true;
+      mini-indentscope.enable = true;
+      mini-trailspace.enable = true;
 
       fidget.enable = true;
       render-markdown.enable = true;
+
+      gitsigns.enable = true;
 
       lspconfig.enable = true;
 
