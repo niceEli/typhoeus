@@ -262,13 +262,14 @@
     ];
 
     plugins = {
-      mini-icons.enable = true;
-      mini-pick.enable = true;
-      mini-pairs.enable = true;
-      mini-statusline.enable = true;
-      mini-diff.enable = true;
+      mini-icons      .enable = true;
+      mini-pick       .enable = true;
+      mini-pairs      .enable = true;
+      mini-statusline .enable = true;
+      mini-diff       .enable = true;
       mini-indentscope.enable = true;
-      mini-trailspace.enable = true;
+      mini-trailspace .enable = true;
+      mini-align      .enable = true;
 
       orgmode.enable = true;
 
