@@ -270,6 +270,9 @@
       mini-indentscope.enable = true;
       mini-trailspace .enable = true;
       mini-align      .enable = true;
+      mini-ai         .enable = true;
+      mini-jump       .enable = true;
+      mini-jump2d     .enable = true;
 
       orgmode.enable = true;
 
