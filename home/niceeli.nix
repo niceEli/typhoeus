@@ -148,6 +148,8 @@ in
       };
     };
 
+    gh.enable = true;
+
     nushell = {
       enable = true;
       loadSessionVariables = true;
