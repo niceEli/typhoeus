@@ -21,6 +21,13 @@
       enabled = true;
       mountFsTab = true;
     };
+
+    docker-desktop.enable = true;
+
+    extraBin = with pkgs; [
+      { src = "${coreutils}/bin/install"; }
+      { src = "${coreutils}/bin/mv"; }
+    ];
   };
 
   nix.settings = {

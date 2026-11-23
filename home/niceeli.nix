@@ -36,6 +36,7 @@ in
       fastfetch
       lazygit
       subversion
+      act
     ];
   };
 
